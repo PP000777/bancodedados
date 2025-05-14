@@ -8,21 +8,17 @@ async function main() {
         filename:'./banco.db',
         driver:sqlite.Database
 })
-await db.exec(`CREATE TABLE usuarios(
+await db.exec(`CREATE TABLE IF NOT EXISTS usuarios(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE
 )`)
 
-await db.close()
+return db
 }catch(err){
     console.log(err)
 }
 }
-main()
 
+module.exports = main
 
-//executar um script simples de criação de tabela
-    
-//executar um script simples de leitura na tabela
-//encerrar a conexão
