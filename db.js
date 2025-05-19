@@ -7,7 +7,7 @@ main().then(retorno => {
     db = retorno
 })
 
-
+function postAPP(){
 app.post('/usuarios', async (req, res) => {
     const {nome, email} = req.body
     try{
@@ -17,6 +17,21 @@ app.post('/usuarios', async (req, res) => {
         res.status(500).json({msg: `${err.message}`})
     }
 })
+}
+
+function getAPP(){
+app.get('/usuarios', async (req, res) => {
+    try{
+        const result = await db.all(`SELECT * FROM usuarios`)
+        res.status(200).json(result)
+    }catch(err){
+        res.status(500).json({msg: `${err.message}`})
+    }
+})
+}
+
+
+
 
 app.listen(8000, (req, res) => {
     console.log("servidor online")
